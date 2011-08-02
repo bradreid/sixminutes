@@ -41,7 +41,7 @@
   }
   
   function finish(target){
-    $('#event_state').val('finished');    
+    $('#event_state').val('did_it');    
     update();             
     new_countdown($('#countdown'));       
   }
@@ -78,7 +78,7 @@
   }
   
   function reset(target){    
-    $('#event_state').val('reset');   
+    $('#event_state').val('start_again');   
     update();         
     new_countdown($('#countdown'));   
   }  
@@ -103,9 +103,9 @@
     %tr
       %td
         =button_to_function 'Start', "start($('#countdown'))", :id => 'start_button'
-        =button_to_function 'Pause', "pause($('#countdown'))", :id => 'pause_button', :style => 'display:none'                 
-        =button_to_function "Reset", "reset($('#countdown'))", :id => 'reset_button', :style => 'display:none'
-        =button_to_function 'More Time', "more_time($('#countdown'))", :id => 'more_time_button', :style => 'display:none'
-        =button_to_function 'Finished', "finish($('#countdown'))", :id => 'finish_button', :style => 'display:none'      
+        =button_to_function 'Break', "pause($('#countdown'))", :id => 'pause_button', :style => 'display:none'                 
+        =button_to_function "Start Again", "reset($('#countdown'))", :id => 'reset_button', :style => 'display:none'
+        =button_to_function 'Still Doing It', "more_time($('#countdown'))", :id => 'more_time_button', :style => 'display:none'
+        =button_to_function 'Did It', "finish($('#countdown'))", :id => 'finish_button', :style => 'display:none'      
                 
         
