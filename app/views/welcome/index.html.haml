@@ -1,9 +1,10 @@
 :javascript
 
-  var length = 360;
+  var length = 600;
   var countdown_params = {until: length, compact: true, format: 'MS', onExpiry: expired}
   
   function new_countdown(target){
+    stop_alarm();
     target.countdown('destroy');
     target.countdown(countdown_params);
     $('#event_length').val(length);
@@ -24,8 +25,17 @@
           data:  $('#event').serialize()
       });    
   }
+  
+  function stop_alarm(){
+    $('embed').remove();
+  }
+  
+  function sound_alarm(){
+    $('#alarm').append("<embed src='audio/alarm_bell.wav' autostart='true' hidden='true' loop='3' playcount='3'> ");
+  }
 
   function expired(){
+    sound_alarm();    
     $('#event_state').val('expired');
     update();
     $('#more_time_button').show();
@@ -98,6 +108,7 @@
           =hidden_field_tag 'event[state]'
           =hidden_field_tag 'event[length]'
           #countdown
+          #alarm
           
           
     %tr
