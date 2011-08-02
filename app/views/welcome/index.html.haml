@@ -1,0 +1,111 @@
+:javascript
+
+  var length = 6;
+  var countdown_params = {until: length, compact: true, format: 'MS', onExpiry: expired}
+  
+  function new_countdown(target){
+    target.countdown('destroy');
+    target.countdown(countdown_params);
+    $('#event_length').val(length);
+    $('#start_button').show();
+    $('#pause_button').hide();
+    $('#finish_button').hide();
+    $('#reset_button').hide();   
+    $('#more_time_button').hide();
+    $('#event_id').val('');    
+    $('#event_state').val('');         
+  }
+
+  function update(data){
+     $.ajax({
+          url: "events/" + $('#event_id').val(),
+          type: "PUT",
+          dataType: 'json',        
+          data:  $('#event').serialize()
+      });    
+  }
+
+  function expired(){
+    $('#event_state').val('expired');
+    update();
+    $('#more_time_button').show();
+    $('#reset_button').hide();
+    $('#pause_button').hide();
+    $('#start_button').hide();
+  }
+
+  function pause(target){
+    target.countdown('pause'); 
+    $('#start_button').show();
+    $('#pause_button').hide();     
+  }
+  
+  function finish(target){
+    $('#event_state').val('finished');    
+    update();             
+    new_countdown($('#countdown'));       
+  }
+  
+  function start(target){   
+    target.countdown('resume');
+    if ($('#event_id').val() == ""){  
+      // this code is used to resume pause too.
+      $.ajax({
+          url: "#{events_path}",
+          type: "POST",
+          dataType: 'json',        
+          data:  $('#event').serialize(),
+          success:    function(request){ $('#event_id').val(request.event.id) },        
+      });      
+    }      
+    $('#start_button').hide();
+    $('#reset_button').show();
+    $('#pause_button').show();    
+    $('#finish_button').show();        
+  }  
+  
+  function resume(target){
+    target.countdown('resume');  
+    $('#start_button').hide();
+    $('#pause_button').show();    
+  }
+  
+  function more_time(target){
+    $('#event_state').val('more_time');   
+    update();         
+    new_countdown($('#countdown'));   
+    start(target); 
+  }
+  
+  function reset(target){    
+    $('#event_state').val('reset');   
+    update();         
+    new_countdown($('#countdown'));   
+  }  
+  
+  $(function(){
+    new_countdown($('#countdown'));
+  });
+
+
+%table
+  %tbody
+    %tr
+      %td
+        -form_tag '', :id => 'event' do |f|
+          =text_field_tag 'event[name]'
+          =hidden_field_tag 'event[id]'
+          =hidden_field_tag 'event[state]'
+          =hidden_field_tag 'event[length]'
+          #countdown
+          
+          
+    %tr
+      %td
+        =button_to_function 'Start', "start($('#countdown'))", :id => 'start_button'
+        =button_to_function 'Pause', "pause($('#countdown'))", :id => 'pause_button', :style => 'display:none'                 
+        =button_to_function "Reset", "reset($('#countdown'))", :id => 'reset_button', :style => 'display:none'
+        =button_to_function 'More Time', "more_time($('#countdown'))", :id => 'more_time_button', :style => 'display:none'
+        =button_to_function 'Finished', "finish($('#countdown'))", :id => 'finish_button', :style => 'display:none'      
+                
+        

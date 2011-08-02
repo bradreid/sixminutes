@@ -1,0 +1,32 @@
+%h2
+  Events
+
+%table
+  %tr
+    %th
+      ID
+    %th
+      Name
+    %th
+      Length
+    %th
+      Started At
+    %th
+      Duration
+    %th
+      State  
+  -@events.each do |tp|
+    %tr
+      %td
+        =tp.id
+      %td
+        =tp.name
+      %td
+        =tp.length
+      %td
+        =tp.created_at.try(:to_formatted_s,:short)
+      %td
+        =tp.duration.try(:to_i)
+      %td
+        =tp.state.humanize
+  
