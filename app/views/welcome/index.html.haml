@@ -7,6 +7,9 @@
     stop_alarm();
     target.countdown('destroy');
     target.countdown(countdown_params);
+    $('#event_name').val('');
+    $('#name').hide();
+    $('#name_input').show();
     $('#event_length').val(length);
     $('#start_button').show();
     $('#pause_button').hide();
@@ -58,6 +61,10 @@
   
   function start(target){   
     target.countdown('resume');
+    $('#event_name').val($('#name_input').val());
+    $('#name').html($('#name_input').val());    
+    $('#name').show();
+    $('#name_input').hide();
     if ($('#event_id').val() == ""){  
       // this code is used to resume pause too.
       $.ajax({
@@ -102,8 +109,10 @@
   %tbody
     %tr
       %td
+        =text_field_tag 'name_input'
+        #name
         -form_tag '', :id => 'event' do |f|
-          =text_field_tag 'event[name]'
+          =hidden_field_tag 'event[name]'
           =hidden_field_tag 'event[id]'
           =hidden_field_tag 'event[state]'
           =hidden_field_tag 'event[length]'
