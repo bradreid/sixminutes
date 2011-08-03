@@ -9,6 +9,6 @@ class Event < ActiveRecord::Base
 private
 
   def set_end_at
-    self.end_at = Time.now if ['finished', 'reset'].include? self.state
+    self.end_at = Time.now if self.state_changed? && [""].include?(self.state_change.first)
   end
 end
