@@ -1,16 +1,61 @@
 :javascript
 
   var length = 360;
-  var countdown_params = {until: length, compact: true, format: 'MS', onExpiry: expired}
+  var countdown_params = {until: length, compact: true, format: 'HMS', onExpiry: expired}
+  var numpad_value = [6,0,0];
+  
+  function reset_numpad(){
+    numpad_value = new Array();  
+  }
+  
+  
+  function display_numpad(){
+    var d = new Array();
+    for (i=numpad_value.length -1;i>=0;i--){
+      d.push(numpad_value[i]);
+    }    
+    for (i=0; i< 6-numpad_value.length;i++){
+      d.push("0");
+    }
+   return "" + d[5] + d[4] + ":" + d[3] + d[2] + ":" + d[1] + d[0]
+  }
+  
+  function integer_seconds(){
+     var d = new Array();
+     for (i=numpad_value.length -1;i>=0;i--){
+       d.push(numpad_value[i]);
+     }    
+     for (i=0; i< 6-numpad_value.length;i++){
+       d.push("0");
+     }
+    return parseInt(d[5] + d[4]) * 60 * 60  + parseInt(d[3] + d[2]) * 60  + parseInt(d[1] + d[0])
+  }
+  
+  function add_value_to_numpad(val){
+    if (val.trim() == 'ENTER'){
+      new_countdown($('#countdown'));
+      $('#controll_buttons').show(); 
+      $('.numpad').hide()      
+    }else{
+      numpad_value.push(val.trim())
+      if (numpad_value.length > 6){
+        reset_numpad();
+      }
+    }
+    $('#countdown').html(display_numpad());
+  }  
+  
+  
   
   function new_countdown(target){
     stop_alarm();
     target.countdown('destroy');
+    countdown_params.until = integer_seconds();
     target.countdown(countdown_params);
     $('#event_name').val('');
     $('#name').hide();
     $('#name_input').show();
-    $('#event_length').val(length);
+    $('#event_length').val(countdown_params.until);
     $('#start_button').show();
     $('#pause_button').hide();
     $('#finish_button').hide();
@@ -101,6 +146,9 @@
   }  
   
   $(function(){
+    $(".numpad .key").click(function(){
+      add_value_to_numpad($(this).html())
+    });    
     new_countdown($('#countdown'));
   });
 
@@ -116,16 +164,50 @@
           =hidden_field_tag 'event[id]'
           =hidden_field_tag 'event[state]'
           =hidden_field_tag 'event[length]'
-          #countdown
+          %table.numpad_display{:border => 1}
+            %tr
+              %td
+                #countdown
+                  00:06:00
+          =link_to "change time", nil, :onclick => "$('#controll_buttons').hide(); $('.numpad').show();return false;"                  
+          %br
+          %table.numpad{:cellpadding => 10, :border => 1, :style => 'display:none'}
+            %tr
+              %td.key
+                6
+              %td.key
+                7
+              %td.key
+                8
+              %td.key
+                9
+            %tr
+              %td.key
+                2
+              %td.key
+                3
+              %td.key
+                4
+              %td.key
+                5
+            %tr
+              %td.key
+                1
+              %td.key
+                0
+              %td.key{:colspan => 2}
+                ENTER
+          
           #alarm
           
           
     %tr
       %td
-        =button_to_function 'Start', "start($('#countdown'))", :id => 'start_button'
-        =button_to_function 'Break', "pause($('#countdown'))", :id => 'pause_button', :style => 'display:none'                 
-        =button_to_function "Start Again", "reset($('#countdown'))", :id => 'reset_button', :style => 'display:none'
-        =button_to_function 'Still Doing It', "more_time($('#countdown'))", :id => 'more_time_button', :style => 'display:none'
-        =button_to_function 'Did It', "finish($('#countdown'))", :id => 'finish_button', :style => 'display:none'      
+        #controll_buttons
+          =button_to_function 'Start', "start($('#countdown'))", :id => 'start_button'
+          =button_to_function 'Break', "pause($('#countdown'))", :id => 'pause_button', :style => 'display:none'                 
+          =button_to_function "Start Again", "reset($('#countdown'))", :id => 'reset_button', :style => 'display:none'
+          =button_to_function 'Still Doing It', "more_time($('#countdown'))", :id => 'more_time_button', :style => 'display:none'
+          =button_to_function 'Did It', "finish($('#countdown'))", :id => 'finish_button', :style => 'display:none'      
                 
         
