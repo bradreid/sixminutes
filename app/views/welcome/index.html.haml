@@ -36,6 +36,8 @@
       new_countdown($('#countdown'));
       $('#controll_buttons').show(); 
       $('.numpad').hide()      
+    }else if (val.trim() == 'CLEAR'){
+      reset_numpad();
     }else{
       numpad_value.push(val.trim())
       if (numpad_value.length > 6){
@@ -62,7 +64,8 @@
     $('#reset_button').hide();   
     $('#more_time_button').hide();
     $('#event_id').val('');    
-    $('#event_state').val('');         
+    $('#event_state').val('');        
+    $('#change_time').show(); 
   }
 
   function update(data){
@@ -120,6 +123,7 @@
           success:    function(request){ $('#event_id').val(request.event.id) },        
       });      
     }      
+    $('#change_time').hide();
     $('#start_button').hide();
     $('#reset_button').show();
     $('#pause_button').show();    
@@ -152,62 +156,64 @@
     new_countdown($('#countdown'));
   });
 
+%center
+  %table
+    %tbody
+      %tr
+        %td{:height => 30, :align => 'center'}
+          =text_field_tag 'name_input'
+          #name      
+      %tr
+        %td{:align => 'center', :width => 300}
 
-%table
-  %tbody
-    %tr
-      %td
-        =text_field_tag 'name_input'
-        #name
-        -form_tag '', :id => 'event' do |f|
-          =hidden_field_tag 'event[name]'
-          =hidden_field_tag 'event[id]'
-          =hidden_field_tag 'event[state]'
-          =hidden_field_tag 'event[length]'
-          %table.numpad_display{:border => 1}
-            %tr
-              %td
-                #countdown
-                  00:06:00
-          =link_to "change time", nil, :onclick => "$('#controll_buttons').hide(); $('.numpad').show();return false;"                  
-          %br
-          %table.numpad{:cellpadding => 10, :border => 1, :style => 'display:none'}
-            %tr
-              %td.key
-                6
-              %td.key
-                7
-              %td.key
-                8
-              %td.key
-                9
-            %tr
-              %td.key
-                2
-              %td.key
-                3
-              %td.key
-                4
-              %td.key
-                5
-            %tr
-              %td.key
-                1
-              %td.key
-                0
-              %td.key{:colspan => 2}
-                ENTER
+          -form_tag '', :id => 'event' do |f|
+            =hidden_field_tag 'event[name]'
+            =hidden_field_tag 'event[id]'
+            =hidden_field_tag 'event[state]'
+            =hidden_field_tag 'event[length]'
+            =render :partial => 'shared/counter'
+            =link_to "change time", nil, :onclick => "$('#controll_buttons').hide(); $(this).hide();$('.numpad').show();return false;", :id => "change_time"
+            %br
+            %table.numpad{:cellpadding => 10, :border => 1, :style => 'display:none'}
+              %tr
+                %td.key
+                  6
+                %td.key
+                  7
+                %td.key
+                  8
+                %td.key
+                  9
+              %tr
+                %td.key
+                  2
+                %td.key
+                  3
+                %td.key
+                  4
+                %td.key
+                  5
+              %tr
+                %td.key
+                  1
+                %td.key
+                  0
+                %td.key{:colspan => 2}
+                  CLEAR
+              %tr
+                %td.key{:colspan => 4}
+                  ENTER
           
-          #alarm
+            #alarm
           
           
-    %tr
-      %td
-        #controll_buttons
-          =button_to_function 'Start', "start($('#countdown'))", :id => 'start_button'
-          =button_to_function 'Break', "pause($('#countdown'))", :id => 'pause_button', :style => 'display:none'                 
-          =button_to_function "Start Again", "reset($('#countdown'))", :id => 'reset_button', :style => 'display:none'
-          =button_to_function 'Still Doing It', "more_time($('#countdown'))", :id => 'more_time_button', :style => 'display:none'
-          =button_to_function 'Did It', "finish($('#countdown'))", :id => 'finish_button', :style => 'display:none'      
+      %tr
+        %td
+          #controll_buttons
+            =button_to_function 'Start', "start($('#countdown'))", :id => 'start_button', :class => "btn green left_float"
+            =button_to_function 'Break', "pause($('#countdown'))", :id => 'pause_button', :style => 'display:none', :class => "btn yellow left_float"               
+            =button_to_function "Start Again", "reset($('#countdown'))", :id => 'reset_button', :style => 'display:none', :class => "btn red left_float"
+            =button_to_function 'Still Doing It', "more_time($('#countdown'))", :id => 'more_time_button', :style => 'display:none', :class => "btn blue left_float"
+            =button_to_function 'Did It', "finish($('#countdown'))", :id => 'finish_button', :style => 'display:none', :class => "btn blue left_float"
                 
         
