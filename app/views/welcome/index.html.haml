@@ -173,7 +173,6 @@
             =hidden_field_tag 'event[state]'
             =hidden_field_tag 'event[length]'
             =render :partial => 'shared/counter'
-            =link_to "change time", nil, :onclick => "$('#controll_buttons').hide(); $(this).hide();$('.numpad').show();return false;", :id => "change_time"
             %br
             %table.numpad{:cellpadding => 10, :border => 1, :style => 'display:none'}
               %tr
@@ -209,12 +208,17 @@
           
           
       %tr
-        %td
-          #controll_buttons
-            =button_to_function 'Start', "start($('#countdown'))", :id => 'start_button', :class => "btn green left_float"
-            =button_to_function 'Break', "pause($('#countdown'))", :id => 'pause_button', :style => 'display:none', :class => "btn yellow left_float"               
-            =button_to_function "Start Again", "reset($('#countdown'))", :id => 'reset_button', :style => 'display:none', :class => "btn red left_float"
-            =button_to_function 'Still Doing It', "more_time($('#countdown'))", :id => 'more_time_button', :style => 'display:none', :class => "btn blue left_float"
-            =button_to_function 'Did It', "finish($('#countdown'))", :id => 'finish_button', :style => 'display:none', :class => "btn green left_float"
+        %td{:align => 'center'}
+          %center
+            %table{:border => 0, :cellpadding => 0, :cellspacing => 0}
+              %tr
+                %td
+                  #controll_buttons
+                    =button_to_function 'Start', "start($('#countdown'))", :id => 'start_button', :class => "btn green left_float"
+                    =link_to "change time", nil, :onclick => "$('#controll_buttons').hide(); $(this).hide();$('.numpad').show();return false;", :id => "change_time", :class => 'btn blue left_float'            
+                    =button_to_function 'Break', "pause($('#countdown'))", :id => 'pause_button', :style => 'display:none', :class => "btn yellow left_float"               
+                    =button_to_function "Start Again", "reset($('#countdown'))", :id => 'reset_button', :style => 'display:none', :class => "btn red left_float"
+                    =button_to_function 'Still Doing It', "more_time($('#countdown'))", :id => 'more_time_button', :style => 'display:none', :class => "btn blue left_float"
+                    =button_to_function 'Did It', "finish($('#countdown'))", :id => 'finish_button', :style => 'display:none', :class => "btn green left_float"
                 
         
