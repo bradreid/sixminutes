@@ -18,7 +18,7 @@
   }
   
   function add_value_to_numpad(val){
-    if (val.trim() == 'ENTER'){
+    if (jQuery.trim(val) == 'ENTER'){
       alert(display_numpad());
     }else{
       numpad_value.push(val.trim())

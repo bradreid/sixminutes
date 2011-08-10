@@ -32,14 +32,14 @@
   }
   
   function add_value_to_numpad(val){
-    if (val.trim() == 'ENTER'){
+    if (jQuery.trim(val) == 'ENTER'){
       new_countdown($('#countdown'));
       $('#controll_buttons').show(); 
       $('.numpad').hide()      
-    }else if (val.trim() == 'CLEAR'){
+    }else if (jQuery.trim(val) == 'CLEAR'){
       reset_numpad();
     }else{
-      numpad_value.push(val.trim())
+      numpad_value.push(jQuery.trim(val))
       if (numpad_value.length > 6){
         reset_numpad();
       }
