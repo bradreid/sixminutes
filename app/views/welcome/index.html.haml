@@ -160,9 +160,10 @@
   %table
     %tbody
       %tr
-        %td{:height => 30, :align => 'center'}
+        %td{:height => 50, :align => 'center'}
           =text_field_tag 'name_input'
-          #name      
+          %h1
+            #name      
       %tr
         %td{:align => 'center', :width => 300}
 
@@ -214,6 +215,6 @@
             =button_to_function 'Break', "pause($('#countdown'))", :id => 'pause_button', :style => 'display:none', :class => "btn yellow left_float"               
             =button_to_function "Start Again", "reset($('#countdown'))", :id => 'reset_button', :style => 'display:none', :class => "btn red left_float"
             =button_to_function 'Still Doing It', "more_time($('#countdown'))", :id => 'more_time_button', :style => 'display:none', :class => "btn blue left_float"
-            =button_to_function 'Did It', "finish($('#countdown'))", :id => 'finish_button', :style => 'display:none', :class => "btn blue left_float"
+            =button_to_function 'Did It', "finish($('#countdown'))", :id => 'finish_button', :style => 'display:none', :class => "btn green left_float"
                 
         
