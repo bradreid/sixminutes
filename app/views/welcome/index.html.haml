@@ -181,34 +181,34 @@
             =hidden_field_tag 'event[length]'
             =render :partial => 'shared/counter'
             %br
-            %table.numpad{:cellpadding => 10, :border => 1, :style => 'display:none'}
+            %table.numpad{:cellpadding => 5, :cellspacing => 5, :border => 0, :style => 'display:none'}
               %tr
-                %td.key
+                %td.key.btn.blue{:width => '25%'}
                   6
-                %td.key
+                %td.key.btn.blue{:width => '25%'}
                   7
-                %td.key
+                %td.key.btn.blue{:width => '25%'}
                   8
-                %td.key
+                %td.key.btn.blue{:width => '25%'}
                   9
               %tr
-                %td.key
+                %td.key.btn.blue{:width => '25%'}
                   2
-                %td.key
+                %td.key.btn.blue{:width => '25%'}
                   3
-                %td.key
+                %td.key.btn.blue{:width => '25%'}
                   4
-                %td.key
+                %td.key.btn.blue{:width => '25%'}
                   5
               %tr
-                %td.key
+                %td.key.btn.blue{:width => '25%'}
                   1
-                %td.key
+                %td.key.btn.blue{:width => '25%'}
                   0
-                %td.key{:colspan => 2}
+                %td.key.btn.yellow{:colspan => 2,:width => '50%'}
                   CLEAR
               %tr
-                %td.key{:colspan => 4}
+                %td.key.btn.green{:colspan => 4,:width => '100%'}
                   ENTER
           
             #alarm
