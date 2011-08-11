@@ -45,14 +45,14 @@ body {
 
 /*BUTTONS */
 .btn, .btn_sm {
-  display: block;
   font-size: 1em;
+  text-align: center;
   text-transform: uppercase;
   text-shadow: 1px 1px 8px #666666;
   letter-spacing: 0.05em;
   position: relative;
   background: #b4b5aa;
-  margin: 0 1em 0 0;
+  margin: 0 0 0 0;
   color: white;
   text-decoration: none;
   cursor: pointer;
@@ -65,14 +65,13 @@ body {
 
 a.btn, a.btn_sm {
   padding: 3px 5px;
-  display: block;
   font-size: 1em;
   text-transform: uppercase;
   text-shadow: 1px 1px 8px #666666;
   letter-spacing: 0.05em;
   position: relative;
   background: #b4b5aa;
-  margin: 0 1em 0 0;
+  margin: 0 0 0 0;
   color: white;
   text-decoration: none;
   cursor: pointer;
