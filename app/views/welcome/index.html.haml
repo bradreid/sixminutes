@@ -54,6 +54,8 @@
     target.countdown('destroy');
     countdown_params.until = integer_seconds();
     target.countdown(countdown_params);
+    $('#counter_container').addClass('flash_counter');
+    $('#counter_container').removeClass('flash_error');    
     $('#event_name').val('');
     $('#name').hide();
     $('#name_input').show();
@@ -88,9 +90,11 @@
   function expired(){
     sound_alarm();    
     $('#event_state').val('expired');
+    $('#counter_container').removeClass('flash_counter');
+    $('#counter_container').addClass('flash_error');    
     update();
     $('#more_time_button').show();
-    $('#reset_button').hide();
+    $('#reset_button').show();
     $('#pause_button').hide();
     $('#start_button').hide();
   }
@@ -102,7 +106,7 @@
   }
   
   function finish(target){
-    $('#event_state').val('did_it');    
+    $('#event_state').val('did_it');     
     update();             
     new_countdown($('#countdown'));       
   }
@@ -144,7 +148,7 @@
   }
   
   function reset(target){    
-    $('#event_state').val('start_again');   
+    $('#event_state').val('abandon');   
     update();         
     new_countdown($('#countdown'));   
   }  
@@ -224,7 +228,7 @@
                     =button_to_function 'Start', "start($('#countdown'))", :id => 'start_button', :class => "btn green"
                     =button_to_function "change time","$('#controll_buttons').hide(); $(this).hide();$('.numpad').show();return false;", :id => "change_time", :class => 'btn blue'            
                     =button_to_function 'Break', "pause($('#countdown'))", :id => 'pause_button', :style => 'display:none', :class => "btn yellow"               
-                    =button_to_function "Start Again", "reset($('#countdown'))", :id => 'reset_button', :style => 'display:none', :class => "btn red"
+                    =button_to_function "Abandon", "reset($('#countdown'))", :id => 'reset_button', :style => 'display:none', :class => "btn red"
                     =button_to_function 'Still Doing It', "more_time($('#countdown'))", :id => 'more_time_button', :style => 'display:none', :class => "btn blue"
                     =button_to_function 'Did It', "finish($('#countdown'))", :id => 'finish_button', :style => 'display:none', :class => "btn green"
                 
