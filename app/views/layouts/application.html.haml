@@ -10,4 +10,7 @@
     = csrf_meta_tag 
 
 %body
+  %ul{:class=>"hmenu"}
+    =render :partial => '/shared/user_links'
+    =render :partial => '/shared/register_links'  
   = yield 

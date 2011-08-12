@@ -1,3 +1,12 @@
+ul.hmenu {
+  float: right;
+  list-style: none;
+  margin: 0 0 2em;
+  padding: 0; }
+
+ul.hmenu li {
+  display: inline; }
+
 body {
   background: white;
   padding: 0;
@@ -184,17 +193,17 @@ a.btn, a.btn_sm {
 
 .flash_notice {
   color: #719a4e;
-  border: #719a4e 3px solid;
+  border: #719a4e 6px solid;
   background: #e8ffc5; }
 
 .flash_warn {
   color: #333333;
-  border: #ffcc00 3px solid;
+  border: #ffcc00 6px solid;
   background: #ffffd0; }
 
 .flash_error {
   color: #cc0000;
-  border: #cc0000 3px solid;
+  border: #cc0000 6px solid;
   background: #ffdddd; }
 
 .feedback_container, .flash_notice, .flash_warn, .flash_error, .flash_counter {
