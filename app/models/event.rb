@@ -1,5 +1,7 @@
 class Event < ActiveRecord::Base
   
+  belongs_to :user
+  
   before_save :set_end_at
   
   def duration

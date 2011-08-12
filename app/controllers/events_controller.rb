@@ -3,6 +3,11 @@ class EventsController < ApplicationController
   
   def index
     @events = Event.order("id desc")
+    if current_user    
+      @events = @events.where(:user_id => current_user) 
+    else
+      @events = @events.where("user_id is null")
+    end
   end
   
   def update
@@ -12,7 +17,7 @@ class EventsController < ApplicationController
   end  
   
   def create
-    @event = Event.new(params[:event])
+    @event = Event.new(params[:event].merge(:user => current_user))
     @event.save  
     respond_with @event
   end
