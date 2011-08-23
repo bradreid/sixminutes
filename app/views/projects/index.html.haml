@@ -1,31 +1,25 @@
 %h2
   Projects
-
-%table
-  %tr
-    %th
-      ID
-    %th
-      Name
-    %th
-      Length
-    %th
-      Started At
-    %th
-      Duration
-    %th
-      State  
-  -@projects.each do |tp|
+%br  
+=link_to 'Create a new project', new_project_path
+%br
+%br
+%table.data.zebra-striped
+  %thead
     %tr
-      %td
-        =tp.id
-      %td
-        =tp.name
-      %td
-        =tp.length
-      %td
-        =tp.created_at.try(:to_formatted_s,:short)
-      %td
-        =tp.duration.try(:to_i)
-      %td
-        =tp.state.humanize
+      %th
+        ID
+      %th
+        Name
+      %th
+        Created At
+  %tbody
+    -@projects.each do |tp|
+      %tr
+        %td
+          =tp.id
+        %td
+          =tp.name
+        %td
+          =tp.created_at.try(:to_formatted_s,:short)
+
