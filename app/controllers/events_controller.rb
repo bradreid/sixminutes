@@ -11,7 +11,7 @@ class EventsController < ApplicationController
   end
   
   def update
-    @event = Event.find(params[:id])
+    @event = current_user ? current_user.events.find(params[:id]) : Event.find(params[:id])
     @event.update_attributes(params[:event])
     respond_with @event
   end  

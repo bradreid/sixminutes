@@ -5,6 +5,7 @@ Sixminutes::Application.routes.draw do
   # first created -> highest priority.
  resources :tests
  resources :events
+ resources :projects
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
