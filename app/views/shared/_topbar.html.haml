@@ -1,0 +1,28 @@
+.topbar
+  .fill
+    .container
+      %h3
+        =link_to 'SixMinutes', root_path
+      %ul
+        %li
+          =link_to 'test', root_path
+        %li
+          =link_to 'testing', root_path
+      -if current_user
+        %ul{:class => 'nav secondary-nav'}
+          %li.menu
+            =link_to current_user.username, "#", :class => 'menu open'
+            %ul.menu-dropdown{:style => 'display:none'}
+              %li
+                =link_to current_user.email
+              %li
+                test
+              %li.divider
+              %li
+                = link_to('Logout', destroy_user_session_path)
+        -else  
+          %ul{:class => 'nav secondary-nav'}
+            %li
+              =link_to('Login', new_user_session_path )
+            %li
+              = link_to('Register', new_user_registration_path)

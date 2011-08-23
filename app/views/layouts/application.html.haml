@@ -4,7 +4,7 @@
     %title
       Six Minutes
     %meta{:name => 'description', :content => 'six minutes'}
-    = stylesheet_link_tag :all 
+    = stylesheet_link_tag 'base.css', 'mybootstrap.css'
     = javascript_include_tag :defaults, 'jquery.countdown.min.js'
     = yield(:head)    
     = csrf_meta_tag 
@@ -21,9 +21,7 @@
     
 
 %body
-  %ul{:class=>"hmenu"}
-    =render :partial => '/shared/user_links'
-    =render :partial => '/shared/register_links'  
-    %li
-      &nbsp;&nbsp;
-  = yield 
+  = render :partial => 'shared/topbar'      
+  .topbar_spacer     
+  .container
+    = yield 

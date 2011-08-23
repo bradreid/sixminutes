@@ -1,11 +1,6 @@
-ul.hmenu {
-  float: right;
-  list-style: none;
-  margin: 0 0 2em;
-  padding: 0; }
-
-ul.hmenu li {
-  display: inline; }
+div.container {
+  width: 940px;
+  margin: 0 auto; }
 
 body {
   background: white;
