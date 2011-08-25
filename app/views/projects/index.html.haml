@@ -13,6 +13,8 @@
         Name
       %th
         Created At
+      %th
+        Actions
   %tbody
     -@projects.each do |tp|
       %tr
@@ -22,4 +24,8 @@
           =tp.name
         %td
           =tp.created_at.try(:to_formatted_s,:short)
+        %td
+          =link_to 'Show', project_path(tp)
+          |
+          =link_to 'Edit', edit_project_path(tp)
 

@@ -18,4 +18,22 @@ class ProjectsController < ApplicationController
       render 'new'
     end
   end
+  
+  def show
+    @project = current_user.projects.find(params[:id])
+  end
+  
+  def edit
+    @project = current_user.projects.find(params[:id])    
+  end
+  
+  def update
+    @project = current_user.projects.find(params[:id])
+    if @project.update_attributes(:params[:project])
+      flash[:notice] = "Project was successfully updated."
+      redirect_to project_path(@project)
+    else
+      render 'edit'
+    end
+  end
 end

@@ -4,5 +4,5 @@
 -form_for @project, :builder => SixminutesFormBuilder do |f|
   =f.error_messages
   =render :partial => 'form', :object => f
-  =f.submit 'Create', :class => 'btn blue'
-  =link_to 'Cancel', projects_path
+  =f.submit 'Update', :class => 'btn blue'
+  =link_to 'Cancel', project_path(@project)
