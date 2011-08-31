@@ -1,0 +1,8 @@
+%h1
+  New Task
+  
+-form_for [@project, @task], :builder => SixminutesFormBuilder do |f|
+  =f.error_messages
+  =render :partial => '/tasks/form', :object => f
+  =f.submit 'Create', :class => 'btn blue'
+  =link_to 'Cancel', projects_path
