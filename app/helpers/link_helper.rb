@@ -18,7 +18,7 @@ module LinkHelper
     elsif remote
       link_to_remote(img_tg, html_options.merge({:url => path, :loading => "$(this).parent().spin();"}))
     else
-      link_to(img_tg, path, html_options)
+      link_to('Delete', path, html_options)
     end
   end  
 end

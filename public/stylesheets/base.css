@@ -201,3 +201,6 @@ a.btn, a.btn_sm {
   -webkit-border-radius: 16px; }
   .feedback_container strong, .flash_notice strong, .flash_warn strong, .flash_error strong, .flash_counter strong {
     font-size: 1.2em; }
+
+tr.drag td {
+  background-color: #d7e8f2; }

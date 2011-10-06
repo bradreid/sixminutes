@@ -24,6 +24,4 @@ class Projects::TasksController < ApplicationController
     flash[:notice] = "You sucessfully deleted a task"
     redirect_to project_path(@project)    
   end
-  
-  
 end

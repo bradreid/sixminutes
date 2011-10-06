@@ -1,3 +1,12 @@
+:javascript
+  $(function(){
+    $('.draggable').tableDnD({
+    	    onDragClass: "drag",
+    	    onDrop: function(table, row) {},
+    		  onDragStart: function(table, row) {}
+    	});
+  });
+
 %h1
   ="Project: #{@project.name}"
 %br
@@ -8,9 +17,11 @@
   &nbsp;
   =link_to "Create a new project task", new_project_task_path(@project), :class => 'btn green'
 
-%table.data
+%table.data.draggable
   %thead
     %tr
+      %th
+        Doittoit
       %th
         ID
       %th
@@ -20,10 +31,14 @@
       %th
         Time Estimate
       %th
-        Doittoit
+        Actions
   %tbody
+    -counter = 0
     -@project.tasks.each do |t|
-      %tr
+      -counter += 1
+      %tr{:id => "#{counter}"}
+        %td
+          =link_to(image_tag('doittoit.jpg', :height => 20), new_project_task_event_path(@project, t))
         %td
           =t.id
         %td
@@ -33,6 +48,6 @@
         %td
           =t.time_estimate
         %td
-          =image_tag('doittoit.jpg', :height => 20)
-          &nbsp;|&nbsp;
+          =link_to 'Edit', edit_project_task_path(@project, t)
+          |
           =delete_link(project_task_path(@project, t))

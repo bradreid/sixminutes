@@ -6,7 +6,9 @@ Sixminutes::Application.routes.draw do
  resources :tests
  resources :events
  resources :projects , :module => 'projects' do
-   resources :tasks
+   resources :tasks, :module => 'tasks' do
+     resources :events
+   end
  end
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
