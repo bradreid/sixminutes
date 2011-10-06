@@ -1,10 +1,12 @@
 %h1
   ="Project: #{@project.name}"
-=@project.description
 %br
-%h3
-  Tasks
-=link_to "Create a new project task", new_project_task_path(@project)
+.span{:style => 'white-space:nowrap'}
+  %h2{:style => 'float:left'}
+    Tasks
+  &nbsp;
+  &nbsp;
+  =link_to "Create a new project task", new_project_task_path(@project), :class => 'btn green'
 
 %table.data
   %thead
@@ -13,6 +15,12 @@
         ID
       %th
         Name
+      %th
+        Status
+      %th
+        Time Estimate
+      %th
+        Doittoit
   %tbody
     -@project.tasks.each do |t|
       %tr
@@ -20,3 +28,11 @@
           =t.id
         %td
           =t.name
+        %td
+          =t.status
+        %td
+          =t.time_estimate
+        %td
+          =image_tag('doittoit.jpg', :height => 20)
+          &nbsp;|&nbsp;
+          =delete_link(project_task_path(@project, t))

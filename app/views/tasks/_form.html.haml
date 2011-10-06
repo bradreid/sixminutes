@@ -2,4 +2,7 @@
   %ul
     %li.form-field.required
       = form.label :name
-      = form.text_field :name, :maxlength=> 50
+      = form.text_field :name, :length => 50, :limit => 255
+    %li.form-field
+      = form.label :time_estimate
+      = form.text_field :time_estimate, :length => 50      

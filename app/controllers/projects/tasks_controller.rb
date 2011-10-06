@@ -17,5 +17,13 @@ class Projects::TasksController < ApplicationController
     end
   end
   
+  def destroy
+    @project = Project.find(params[:project_id])
+    @task = @project.tasks.find(params[:id])
+    @task.destroy
+    flash[:notice] = "You sucessfully deleted a task"
+    redirect_to project_path(@project)    
+  end
+  
   
 end

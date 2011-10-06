@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
 
   has_many :projects
+  has_many :events
 
   attr_accessor :login
   # Setup accessible (or protected) attributes for your model
